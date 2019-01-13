@@ -19,6 +19,7 @@ namespace LibraryManagementSystem.Controllers
             _bookRepository = bookRepository;
         }
 
+        [Route("Customer")]
         public IActionResult List()
         {
             var customerVM = new List<CustomerViewModel>();
@@ -41,5 +42,15 @@ namespace LibraryManagementSystem.Controllers
 
             return View(customerVM);
         }
+
+        public IActionResult Delete(int id)
+        {
+            var customer = _customerRepository.GetById(id);
+
+            _customerRepository.Delete(customer);
+
+            return RedirectToAction("List");
+        }
+
     }    
 }
